@@ -7,8 +7,9 @@ class MessagesController < ApplicationController
   end
 
   def show
-  	message = Message.find(9)
-  	render json: url_for(message.images)
+  	message = Message.last
+  	images = message.images.map{ |image| url_for(image)}
+  	render json:  images
   end
 
   private

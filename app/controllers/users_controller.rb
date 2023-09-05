@@ -7,7 +7,7 @@ class UsersController < ApplicationController
 	end
 
 	def show
-		user = User.first
+		user = User.last
 		render json: url_for(user.avatar)
 	end
 
@@ -16,6 +16,12 @@ class UsersController < ApplicationController
 		user.avatar.purge_later
 		render json: user
 	end
+
+	def download
+		user = User.first
+		binary = user.avatar.download
+    render json: binary
+  end
 
 	private
   def user_params
